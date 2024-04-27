@@ -4,42 +4,71 @@ class Program
 {
     static void Main(string[] args)
     {
-        Console.Write("What is your grade percentage? ");
-        string answer = Console.ReadLine();
-        int percent = int.Parse(answer);
+        // Ask the user for their percentage grade
+        Console.Write("Enter the percentage grade: ");
+        double percentageGrade = Convert.ToDouble(Console.ReadLine());
 
-        string letter = "";
-
-        if (percent >= 90)
+        // Determine the letter grade
+        string letterGrade = "";
+        if (percentageGrade >= 90)
         {
-            letter = "A";
+            letterGrade = "A";
         }
-        else if (percent >= 80)
+        else if (percentageGrade >= 80)
         {
-            letter = "B";
+            letterGrade = "B";
         }
-        else if (percent >= 70)
+        else if (percentageGrade >= 70)
         {
-            letter = "C";
+            letterGrade = "C";
         }
-        else if (percent >= 60)
+        else if (percentageGrade >= 60)
         {
-            letter = "D";
+            letterGrade = "D";
         }
         else
         {
-            letter = "F";
+            letterGrade = "F";
         }
 
-        Console.WriteLine($"Your grade is: {letter}");
-        
-        if (percent >= 70)
+        // Check if the user passed the course
+        string message = "";
+        if (letterGrade != "F")
         {
-            Console.WriteLine("You passed!");
+            message = "Congratulations, you passed the course!";
         }
         else
         {
-            Console.WriteLine("Good luck next time!");
+            message = "You didn't pass this time, but don't get discouraged!";
         }
+
+        // Display the letter grade and the message
+        Console.WriteLine("Your letter grade is: " + letterGrade);
+        Console.WriteLine(message);
+
+        // Stretch Challenge: Add ability to include a "+" or "-"
+        int lastDigit = Convert.ToInt32(percentageGrade.ToString().Substring(percentageGrade.ToString().Length - 1));
+        string sign = "";
+        if (lastDigit >= 7)
+        {
+            sign = "+";
+        }
+        else if (lastDigit < 3)
+        {
+            sign = "-";
+        }
+
+        // Handle special cases of A+ and F+
+        if (letterGrade == "A" && sign == "+")
+        {
+            letterGrade = "A-";
+        }
+        else if (letterGrade == "F" && sign == "+")
+        {
+            sign = "";
+        }
+
+        // Display the letter grade with the sign
+        Console.WriteLine("Your letter grade with sign is: " + letterGrade + sign);
     }
 }
